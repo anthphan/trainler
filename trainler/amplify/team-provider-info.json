@@ -1,0 +1,24 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-trainler-dev-cf6dc-authRole",
+      "UnauthRoleArn": "arn:aws:iam::124355644835:role/amplify-trainler-dev-cf6dc-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::124355644835:role/amplify-trainler-dev-cf6dc-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-trainler-dev-cf6dc-deployment",
+      "UnauthRoleName": "amplify-trainler-dev-cf6dc-unauthRole",
+      "StackName": "amplify-trainler-dev-cf6dc",
+      "StackId": "arn:aws:cloudformation:us-east-1:124355644835:stack/amplify-trainler-dev-cf6dc/9a6f5a80-c6f9-11ef-929f-12e4cf62e153",
+      "AmplifyAppId": "d34hw8s57uwrhk"
+    },
+    "categories": {
+      "auth": {
+        "trainler1dd9b1e9": {},
+        "userPoolGroups": {}
+      },
+      "api": {
+        "trainler": {}
+      }
+    }
+  }
+}

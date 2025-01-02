@@ -1,0 +1,43 @@
+type User @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  username: String!
+  email: String!
+  workoutSplits: [WorkoutSplit] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+type WorkoutSplit
+  @model
+  @auth(
+    rules: [
+      { allow: owner } # Allow only the resource owner
+    ]
+  ) {
+  id: ID!
+  name: String!
+  description: String
+  owner: String # Tracks the owner (e.g., email or username)
+  userID: ID! @index(name: "byUser", sortKeyFields: ["id"])
+  weeks: [Week] @hasMany(indexName: "byWorkoutSplit", fields: ["id"])
+}
+
+type Week @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  workoutSplitID: ID! @index(name: "byWorkoutSplit", sortKeyFields: ["id"])
+  days: [Day] @hasMany(indexName: "byWeek", fields: ["id"])
+}
+
+type Day @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  dayName: String!
+  weekID: ID! @index(name: "byWeek", sortKeyFields: ["id"])
+  exercises: [Exercise] @hasMany(indexName: "byDay", fields: ["id"])
+}
+
+type Exercise @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  reps: Int
+  sets: Int
+  dayID: ID! @index(name: "byDay", sortKeyFields: ["id"])
+}

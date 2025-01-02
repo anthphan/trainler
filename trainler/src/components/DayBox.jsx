@@ -1,16 +1,15 @@
 import React from "react";
 
-function DayBox({ day, exercises, onAddClick, onEditExercise, onRemoveExercise }) {
+function DayBox({ day, dayID, exercises = [], onAddClick, onEditExercise, onRemoveExercise }) {
+  const exercisesArray = Array.isArray(exercises) ? exercises : [];
+
   return (
     <div className="w-full border-b border-gray-300 bg-gray-100 py-4">
-      {/* Day Name */}
       <div className="px-4 mb-2">
         <h3 className="text-lg font-bold text-gray-800">{day}</h3>
       </div>
-
-      {/* Exercises Table */}
       <div className="px-4">
-        {exercises.length === 0 ? (
+        {exercisesArray.length === 0 ? (
           <p className="text-gray-500 text-sm">No exercises added</p>
         ) : (
           <table className="table-auto w-full text-sm text-left">
@@ -23,20 +22,20 @@ function DayBox({ day, exercises, onAddClick, onEditExercise, onRemoveExercise }
               </tr>
             </thead>
             <tbody>
-              {exercises.map((ex, index) => (
+              {exercisesArray.map((ex, index) => (
                 <tr key={index} className="even:bg-gray-50">
                   <td className="px-2 py-1">{ex.name}</td>
                   <td className="px-2 py-1">{ex.sets}</td>
                   <td className="px-2 py-1">{ex.reps}</td>
                   <td className="px-2 py-1 flex gap-2">
                     <button
-                      onClick={() => onEditExercise(day, index)}
+                      onClick={() => onEditExercise(dayID, index)}
                       className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
                     >
                       Edit
                     </button>
                     <button
-                      onClick={() => onRemoveExercise(day, index)}
+                      onClick={() => onRemoveExercise(dayID, index)}
                       className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
                     >
                       Remove
@@ -48,11 +47,9 @@ function DayBox({ day, exercises, onAddClick, onEditExercise, onRemoveExercise }
           </table>
         )}
       </div>
-
-      {/* Add Exercise Button */}
       <div className="px-4 mt-4">
         <button
-          onClick={onAddClick}
+          onClick={() => onAddClick(dayID, day)}
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >
           Add Exercise
